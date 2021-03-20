@@ -1,4 +1,5 @@
 const express = require('express');
+const {rawListeners} = require('../models/Todo');
 const router = express.Router();
 const Todo = require('../models/Todo');
 
@@ -27,6 +28,31 @@ router.post('/', async (req, res) => {
         .catch(err => {
             res.json({message: err});
         })
+});
+
+//PUT
+router.put('/', async (req, res) => {
+    const todo = new Todo({
+        _id: req.body._id,
+        text: req.body.text,
+        priority: req.body.priority,
+        done: req.body.done
+    });
+    
+    let updatedTodo = null;
+
+    Todo.findOneAndUpdate(
+        {_id: todo._id},
+        todo,
+        {
+            new: true
+        },
+        function (err, res) {
+            updatedTodo = res;
+        }
+    );
+
+    res.json(updatedTodo);
 });
 
 module.exports = router;
