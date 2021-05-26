@@ -3,7 +3,7 @@ const {rawListeners} = require('../models/Todo');
 const router = express.Router();
 const Todo = require('../models/Todo');
 
-//GET
+// GET
 router.get('/', async (req, res) => {
     try {
         const todos = await Todo.find();
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-//POST
+// POST
 router.post('/', async (req, res) => {
     const todo = new Todo({
         text: req.body.text,
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         })
 });
 
-//PUT
+// PUT
 router.put('/', async (req, res) => {
     const todo = new Todo({
         _id: req.body._id,
