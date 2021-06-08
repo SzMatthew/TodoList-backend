@@ -5,10 +5,6 @@ const TodoSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    projectname: {
-        type: String,
-        required: false
-    },
     text: {
         type: String,
         required: true
