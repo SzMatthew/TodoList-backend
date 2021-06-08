@@ -1,12 +1,17 @@
 const express = require('express');
-const router = express.Router();
 const Todo = require('../models/Todo');
+const Project = require('../models/Project');
+const router = express.Router();
 
 // GET
-router.get('/', async (req, res) => {
+router.get('/getTodosByProjectId', async (req, res) => {
     try {
-        const todos = await Todo.find();
-        res.json(todos);
+        const todos = await Todo.find({ projectId: req.query.projectId }).exec();
+        const project = await Project.findById(req.query.projectId).exec();
+        res.json({
+            projectTitle: project.title,
+            todos
+        });
     } catch (err) {
         res.json({ message: err });
     }
@@ -15,6 +20,7 @@ router.get('/', async (req, res) => {
 // POST
 router.post('/', async (req, res) => {
     const todo = new Todo({
+        projectId: req.body.projectId,
         text: req.body.text,
         priority: req.body.priority,
         done: req.body.done
@@ -33,6 +39,7 @@ router.post('/', async (req, res) => {
 router.put('/', async (req, res) => {
     const todo = new Todo({
         _id: req.body._id,
+        projectId: req.body.projectId,
         text: req.body.text,
         priority: req.body.priority,
         done: req.body.done

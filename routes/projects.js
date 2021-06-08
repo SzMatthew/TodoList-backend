@@ -2,7 +2,7 @@ const express = require('express');
 const Project = require('../models/Project');
 const router = express.Router();
 
-// GET
+// #region GET
 router.get('/', async (req, res) => {
     try {
         const project = await Project.find();
@@ -12,7 +12,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST
+// #endregion
+
+// #region PUT
 router.post('/', async (req, res) => {
     const project = new Project({
         title: req.body.title
@@ -26,5 +28,7 @@ router.post('/', async (req, res) => {
             res.json({ message: err });
         })
 });
+
+// #endregion
 
 module.exports = router;

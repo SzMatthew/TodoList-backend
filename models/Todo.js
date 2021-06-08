@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 
 const TodoSchema = mongoose.Schema({
+    projectId: {
+        type: String,
+        required: true
+    },
+    projectname: {
+        type: String,
+        required: false
+    },
     text: {
         type: String,
         required: true
