@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 // #endregion
 
-// #region PUT
+// #region POST
 router.post('/', async (req, res) => {
     const project = new Project({
         title: req.body.title
@@ -29,6 +29,24 @@ router.post('/', async (req, res) => {
         })
 });
 
+// #endregion
+
+// #region PUT
+router.put('/updateProjectTitle', async (req, res) => {
+    const project = new Project({
+        _id: req.body.projectId,
+        title: req.body.projectTitle
+    });
+    
+    Project.findOneAndUpdate(
+        { _id: project._id },
+        project,
+        { new: true },
+        function (err, result) {
+            res.json(result);
+        }
+    );
+});
 // #endregion
 
 module.exports = router;

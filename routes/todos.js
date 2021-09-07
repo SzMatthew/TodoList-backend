@@ -45,18 +45,14 @@ router.put('/', async (req, res) => {
         done: req.body.done
     });
     
-    let updatedTodo = null;
-
     Todo.findOneAndUpdate(
         { _id: todo._id },
         todo,
         { new: true },
-        function (err, res) {
-            updatedTodo = res;
+        function (err, result) {
+            res.json(result);
         }
     );
-
-    res.json(updatedTodo);
 });
 
 // DELETE
