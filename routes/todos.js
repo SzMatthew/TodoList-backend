@@ -3,7 +3,7 @@ const Todo = require('../models/Todo');
 const Project = require('../models/Project');
 const router = express.Router();
 
-// GET
+// #region GET
 router.get('/getTodosByProjectId', async (req, res) => {
     try {
         const todos = await Todo.find({ projectId: req.query.projectId }).exec();
@@ -17,7 +17,9 @@ router.get('/getTodosByProjectId', async (req, res) => {
     }
 });
 
-// POST
+// #endregion
+
+// #region POST
 router.post('/', async (req, res) => {
     const todo = new Todo({
         projectId: req.body.projectId,
@@ -35,7 +37,9 @@ router.post('/', async (req, res) => {
         })
 });
 
-// PUT
+// #endregion
+
+// #region PUT
 router.put('/', async (req, res) => {
     const todo = new Todo({
         _id: req.body._id,
@@ -55,7 +59,9 @@ router.put('/', async (req, res) => {
     );
 });
 
-// DELETE
+// #endregion
+
+// #region DELETE
 router.delete('/:id', async (req, res) => {
     const idToDelete = req.params.id;
 
@@ -67,5 +73,7 @@ router.delete('/:id', async (req, res) => {
         }
     });
 });
+
+// #endregion
 
 module.exports = router;
