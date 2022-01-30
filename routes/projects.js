@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 // #endregion
 
 // #region POST
-router.post('/', async (req, res) => {
+router.post('/insertProject', async (req, res) => {
     const project = new Project({
         title: req.body.title
     });
