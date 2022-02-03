@@ -49,4 +49,20 @@ router.put('/updateProjectTitle', async (req, res) => {
 });
 // #endregion
 
+// #region DELETE
+
+router.delete('/:id', async (req, res) => {
+    const idToDelete = req.params.id;
+
+    Project.findByIdAndDelete(idToDelete, function (err) {
+        if (err) {
+            res.json('Couldn\'t delete Project');
+        } else {
+            res.json(true);
+        }
+    });
+});
+
+// #endregion
+
 module.exports = router;
