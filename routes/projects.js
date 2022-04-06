@@ -5,7 +5,7 @@ const router = express.Router();
 // #region GET
 router.get('/', async (req, res) => {
     try {
-        const project = await Project.find();
+        const project = await Project.find({ userId: req.query.userId });
         res.json(project);
     } catch (err) {
         res.json({ message: err });
