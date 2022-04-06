@@ -17,7 +17,8 @@ router.get('/', async (req, res) => {
 // #region POST
 router.post('/insertProject', async (req, res) => {
     const project = new Project({
-        title: req.body.title
+        title: req.body.title,
+        userId: req.body.userId
     });
 
     project.save()
