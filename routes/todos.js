@@ -10,6 +10,7 @@ router.get('/getTodosByProjectId', async (req, res) => {
         const project = await Project.findById(req.query.projectId).exec();
         res.json({
             projectTitle: project.title,
+            projectId: req.query.projectId,
             todos
         });
     } catch (err) {
